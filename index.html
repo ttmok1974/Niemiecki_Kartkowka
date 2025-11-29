@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Quiz Niemiecki - Präteritum</title>
+<style>
+  body { 
+    font-family: 'Segoe UI', Tahoma, sans-serif; 
+    background: #e0f7fa; 
+    margin: 0; 
+    padding: 20px; 
+  }
+  h1 { 
+    text-align: center; 
+    color: #00796b; 
+    margin-bottom: 30px; 
+  }
+  .quiz-container { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px; 
+  }
+  .card { 
+    background: #ffffff; 
+    padding: 20px; 
+    border-radius: 15px; 
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1); 
+    transition: transform 0.2s, box-shadow 0.2s; 
+  }
+  .card:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+  }
+  label { 
+    display: block; 
+    font-weight: 600; 
+    margin-bottom: 8px; 
+    color: #004d40; 
+  }
+  input { 
+    width: 100%; 
+    padding: 10px; 
+    font-size: 1em; 
+    border-radius: 8px; 
+    border: 1px solid #b2dfdb; 
+    outline: none; 
+    transition: border-color 0.2s, background-color 0.2s; 
+  }
+  input.correct { 
+    background-color: #c8e6c9; 
+    border-color: #388e3c; 
+    color: #2e7d32; 
+  }
+  input.incorrect { 
+    background-color: #ffcdd2; 
+    border-color: #d32f2f; 
+    color: #c62828; 
+  }
+  .answer { 
+    margin-top: 6px; 
+    font-size: 0.9em; 
+    color: #00695c; 
+    display: none; 
+  }
+  button { 
+    display: block; 
+    margin: 30px auto; 
+    padding: 12px 25px; 
+    font-size: 1em; 
+    background-color: #00796b; 
+    color: #ffffff; 
+    border: none; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    transition: background-color 0.2s; 
+  }
+  button:hover { 
+    background-color: #004d40; 
+  }
+  .result { 
+    text-align: center; 
+    font-size: 1.3em; 
+    font-weight: 600; 
+    margin-top: 20px; 
+    color: #004d40; 
+  }
+</style>
+</head>
+<body>
+
+<h1>Quiz Niemiecki - Präteritum</h1>
+
+<div class="quiz-container" id="quiz"></div>
+
+<button onclick="checkAnswers()">Sprawdź odpowiedzi</button>
+
+<div class="result" id="result"></div>
+
+<script>
+const verbs = [
+  {inf: "beginnen", prat: "begann"},
+  {inf: "essen", prat: "aß"},
+  {inf: "fahren", prat: "fuhr"},
+  {inf: "finden", prat: "fand"},
+  {inf: "geben", prat: "gab"},
+  {inf: "gehen", prat: "ging"},
+  {inf: "haben", prat: "hatte"},
+  {inf: "helfen", prat: "half"},
+  {inf: "kommen", prat: "kam"},
+  {inf: "lesen", prat: "las"},
+  {inf: "schlafen", prat: "schlief"},
+  {inf: "schreiben", prat: "schrieb"},
+  {inf: "schwimmen", prat: "schwamm"},
+  {inf: "sehen", prat: "sah"},
+  {inf: "sein", prat: "war"},
+  {inf: "sprechen", prat: "sprach"},
+  {inf: "stehen", prat: "stand"},
+  {inf: "tragen", prat: "trug"},
+  {inf: "treffen", prat: "traf"}
+];
+
+const quizDiv = document.getElementById('quiz');
+
+verbs.forEach((verb, index) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <label>${index + 1}. ${verb.inf}</label>
+    <input type="text" id="verb${index}">
+    <div class="answer" id="answer${index}">Poprawna odpowiedź: <strong>${verb.prat}</strong></div>
+  `;
+  quizDiv.appendChild(card);
+});
+
+function checkAnswers() {
+  let score = 0;
+  verbs.forEach((verb, index) => {
+    const input = document.getElementById(`verb${index}`);
+    const answerDiv = document.getElementById(`answer${index}`);
+    const userAnswer = input.value.trim();
+    answerDiv.style.display = 'block';
+    if (userAnswer === verb.prat) {
+      input.classList.add('correct');
+      input.classList.remove('incorrect');
+      score++;
+    } else {
+      input.classList.add('incorrect');
+      input.classList.remove('correct');
+    }
+  });
+  document.getElementById('result').innerText = `Twój wynik: ${score} / ${verbs.length}`;
+}
+</script>
+
+</body>
+</html>
