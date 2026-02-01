@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Travel Kahoot Quiz</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#1e1e2f;
+    color:white;
+    text-align:center;
+}
+
+#game{
+    max-width:700px;
+    margin:auto;
+    margin-top:50px;
+}
+
+button{
+    width:45%;
+    padding:20px;
+    font-size:18px;
+    margin:10px;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    color:white;
+}
+
+.red{background:#e74c3c;}
+.blue{background:#3498db;}
+.green{background:#2ecc71;}
+.yellow{background:#f1c40f;color:black;}
+
+#timer{
+    font-size:22px;
+    margin:15px;
+}
+
+#score{
+    font-size:22px;
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="game">
+<h1>🌍 Travel Vocabulary Kahoot</h1>
+<div id="timer"></div>
+<h2 id="question"></h2>
+
+<div>
+<button class="red" onclick="answer(0)"></button>
+<button class="blue" onclick="answer(1)"></button>
+</div>
+<div>
+<button class="green" onclick="answer(2)"></button>
+<button class="yellow" onclick="answer(3)"></button>
+</div>
+
+<div id="score"></div>
+</div>
+
+<script>
+
+const questions = [
+{q:"hiking", a:["jazda autem","piesza wycieczka","lot samolotem","nurkowanie"], c:1},
+{q:"overcrowded", a:["czysty","zatłoczony","cichy","drogi"], c:1},
+{q:"life jacket", a:["kamizelka ratunkowa","kurtka","plecak","hełm"], c:0},
+{q:"traffic jam", a:["rondo","objazd","korek","tunel"], c:2},
+{q:"sightseeing", a:["biwakowanie","zwiedzanie","pakowanie","nurkowanie"], c:1},
+{q:"breakdown", a:["wypadek","awaria pojazdu","lot","bilet"], c:1},
+{q:"pickpocket", a:["turysta","kieszonkowiec","kierowca","pilot"], c:1},
+{q:"detour", a:["skrzyżowanie","most","objazd","parking"], c:2},
+{q:"emergency services", a:["hotel","linie lotnicze","służby ratunkowe","sklep"], c:2},
+{q:"budget travel", a:["luksusowe","szybkie","tanie","biznesowe"], c:2},
+
+{q:"camping", a:["biwakowanie","latanie","zwiedzanie","jazda pociągiem"], c:0},
+{q:"backpacking", a:["rejs","podróż z plecakiem","wakacje w hotelu","praca"], c:1},
+{q:"itinerary", a:["paszport","plan podróży","walizka","bilet"], c:1},
+{q:"guide", a:["pilot wycieczek","kucharz","policjant","sprzedawca"], c:0},
+{q:"tourist site", a:["hotel","atrakcja turystyczna","lotnisko","sklep"], c:1},
+{q:"historic site", a:["nowoczesny budynek","zabytek","biurowiec","autostrada"], c:1},
+{q:"marketplace", a:["park","targ","port","muzeum"], c:1},
+{q:"temple", a:["świątynia","zamek","hotel","sklep"], c:0},
+{q:"fortress", a:["forteca","most","tunel","dworzec"], c:0},
+{q:"amusement park", a:["park rozrywki","las","plaża","lotnisko"], c:0},
+
+{q:"lane", a:["pas ruchu","most","parking","tunel"], c:0},
+{q:"junction", a:["rondo","skrzyżowanie","parking","dworzec"], c:1},
+{q:"roadworks", a:["remont drogi","most","autostrada","tunel"], c:0},
+{q:"pedestrian", a:["kierowca","pieszy","turysta","pilot"], c:1},
+{q:"overtake", a:["skręcać","wyprzedzać","hamować","parkować"], c:1},
+{q:"consume fuel", a:["tankować","zużywać paliwo","sprzedawać","myć auto"], c:1},
+
+{q:"capsize", a:["zatonąć","wywrócić się","zatrzymać","przyspieszyć"], c:1},
+{q:"collision", a:["postój","kolizja","objazd","remont"], c:1},
+{q:"emergency landing", a:["awaryjne lądowanie","start","opóźnienie","kontrola"], c:0},
+{q:"flat tyre", a:["pełna opona","przebita opona","nowa opona","brudna opona"], c:1},
+{q:"first aid", a:["pomoc drogowa","pierwsza pomoc","bilet","ubezpieczenie"], c:1},
+
+{q:"scam", a:["promocja","oszustwo","reklama","zniżka"], c:1},
+{q:"valuables", a:["dokumenty","kosztowności","ubrania","bagaż"], c:1},
+{q:"money belt", a:["portfel","saszetka","plecak","walizka"], c:1},
+{q:"travel insurance", a:["bilet","ubezpieczenie","hotel","paszport"], c:1},
+{q:"be aware of", a:["ignorować","uważać na","kupować","naprawiać"], c:1},
+];
+
+let current=0;
+let score=0;
+let time=25;
+let timer;
+
+function loadQuestion(){
+    if(current>=15){
+        document.getElementById("game").innerHTML =
+        `<h1>🎉 Koniec!</h1><h2>Wynik: ${score}/15</h2>`;
+        return;
+    }
+
+    let q = questions[Math.floor(Math.random()*questions.length)];
+
+    window.correct = q.c;
+
+    document.getElementById("question").innerText = q.q;
+    document.querySelectorAll("button")[0].innerText = q.a[0];
+    document.querySelectorAll("button")[1].innerText = q.a[1];
+    document.querySelectorAll("button")[2].innerText = q.a[2];
+    document.querySelectorAll("button")[3].innerText = q.a[3];
+
+    time=25;
+    document.getElementById("timer").innerText = "⏱ " + time;
+    clearInterval(timer);
+
+    timer=setInterval(()=>{
+        time--;
+        document.getElementById("timer").innerText="⏱ "+time;
+        if(time===0){
+            current++;
+            loadQuestion();
+        }
+    },1000);
+}
+
+function answer(n){
+    if(n===window.correct) score++;
+    current++;
+    loadQuestion();
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
