@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Travel Kahoot Quiz</title>
-
 <style>
 body{
     font-family:Arial;
@@ -45,7 +44,6 @@ button{
 }
 </style>
 </head>
-
 <body>
 
 <div id="game">
@@ -66,48 +64,43 @@ button{
 </div>
 
 <script>
-
 const questions = [
-{q:"hiking", a:["jazda autem","piesza wycieczka","lot samolotem","nurkowanie"], c:1},
-{q:"overcrowded", a:["czysty","zatłoczony","cichy","drogi"], c:1},
-{q:"life jacket", a:["kamizelka ratunkowa","kurtka","plecak","hełm"], c:0},
-{q:"traffic jam", a:["rondo","objazd","korek","tunel"], c:2},
-{q:"sightseeing", a:["biwakowanie","zwiedzanie","pakowanie","nurkowanie"], c:1},
-{q:"breakdown", a:["wypadek","awaria pojazdu","lot","bilet"], c:1},
-{q:"pickpocket", a:["turysta","kieszonkowiec","kierowca","pilot"], c:1},
-{q:"detour", a:["skrzyżowanie","most","objazd","parking"], c:2},
-{q:"emergency services", a:["hotel","linie lotnicze","służby ratunkowe","sklep"], c:2},
-{q:"budget travel", a:["luksusowe","szybkie","tanie","biznesowe"], c:2},
-
-{q:"camping", a:["biwakowanie","latanie","zwiedzanie","jazda pociągiem"], c:0},
-{q:"backpacking", a:["rejs","podróż z plecakiem","wakacje w hotelu","praca"], c:1},
-{q:"itinerary", a:["paszport","plan podróży","walizka","bilet"], c:1},
-{q:"guide", a:["pilot wycieczek","kucharz","policjant","sprzedawca"], c:0},
-{q:"tourist site", a:["hotel","atrakcja turystyczna","lotnisko","sklep"], c:1},
-{q:"historic site", a:["nowoczesny budynek","zabytek","biurowiec","autostrada"], c:1},
-{q:"marketplace", a:["park","targ","port","muzeum"], c:1},
-{q:"temple", a:["świątynia","zamek","hotel","sklep"], c:0},
-{q:"fortress", a:["forteca","most","tunel","dworzec"], c:0},
-{q:"amusement park", a:["park rozrywki","las","plaża","lotnisko"], c:0},
-
-{q:"lane", a:["pas ruchu","most","parking","tunel"], c:0},
-{q:"junction", a:["rondo","skrzyżowanie","parking","dworzec"], c:1},
-{q:"roadworks", a:["remont drogi","most","autostrada","tunel"], c:0},
-{q:"pedestrian", a:["kierowca","pieszy","turysta","pilot"], c:1},
-{q:"overtake", a:["skręcać","wyprzedzać","hamować","parkować"], c:1},
-{q:"consume fuel", a:["tankować","zużywać paliwo","sprzedawać","myć auto"], c:1},
-
-{q:"capsize", a:["zatonąć","wywrócić się","zatrzymać","przyspieszyć"], c:1},
-{q:"collision", a:["postój","kolizja","objazd","remont"], c:1},
-{q:"emergency landing", a:["awaryjne lądowanie","start","opóźnienie","kontrola"], c:0},
-{q:"flat tyre", a:["pełna opona","przebita opona","nowa opona","brudna opona"], c:1},
-{q:"first aid", a:["pomoc drogowa","pierwsza pomoc","bilet","ubezpieczenie"], c:1},
-
-{q:"scam", a:["promocja","oszustwo","reklama","zniżka"], c:1},
-{q:"valuables", a:["dokumenty","kosztowności","ubrania","bagaż"], c:1},
-{q:"money belt", a:["portfel","saszetka","plecak","walizka"], c:1},
-{q:"travel insurance", a:["bilet","ubezpieczenie","hotel","paszport"], c:1},
-{q:"be aware of", a:["ignorować","uważać na","kupować","naprawiać"], c:1},
+{q:"hiking",a:["piesza wycieczka","jazda autobusem","lot","rejs"],c:0},
+{q:"backpacking",a:["podróż z plecakiem","wakacje w hotelu","rejs","delegacja"],c:0},
+{q:"itinerary",a:["plan podróży","bagaż","paszport","hotel"],c:0},
+{q:"sightseeing",a:["zwiedzanie","biwak","pakowanie","rejs"],c:0},
+{q:"secluded",a:["głośny","ustronny","zatłoczony","nowoczesny"],c:1},
+{q:"staycation",a:["wakacje w domu","rejs","wyjazd","wolontariat"],c:0},
+{q:"round-the-world trip",a:["podróż dookoła świata","wyjazd służbowy","urlop weekendowy","rejs"],c:0},
+{q:"amusement park",a:["park rozrywki","rezerwat","zamek","świątynia"],c:0},
+{q:"fortress",a:["forteca","tunel","hotel","dworzec"],c:0},
+{q:"marketplace",a:["targ","muzeum","lotnisko","park"],c:0},
+{q:"picturesque",a:["malowniczy","niebezpieczny","brudny","nowoczesny"],c:0},
+{q:"World Heritage Site",a:["zabytek UNESCO","hotel","lotnisko","dworzec"],c:0},
+{q:"overcrowded",a:["zatłoczony","czysty","cichy","drogi"],c:0},
+{q:"guidebook",a:["przewodnik","mapa","paszport","bilet"],c:0},
+{q:"tacky souvenir",a:["tandetna pamiątka","zabytek","mapa","bilet"],c:0},
+{q:"tourist site",a:["atrakcja turystyczna","hotel","lotnisko","parking"],c:0},
+{q:"traffic jam",a:["korek","most","tunel","rondo"],c:0},
+{q:"detour",a:["objazd","parking","skrzyżowanie","tunel"],c:0},
+{q:"junction",a:["skrzyżowanie","most","pas ruchu","tunel"],c:0},
+{q:"pedestrian",a:["pieszy","kierowca","pilot","turysta"],c:0},
+{q:"roadworks",a:["roboty drogowe","wypadek","tunel","parking"],c:0},
+{q:"breakdown service",a:["pomoc drogowa","szpital","policja","lotnisko"],c:0},
+{q:"collision",a:["kolizja","objazd","postój","tunel"],c:0},
+{q:"capsize",a:["wywrócić się","zaparkować","skręcić","ruszyć"],c:0},
+{q:"emergency landing",a:["awaryjne lądowanie","start","opóźnienie","kontrola"],c:0},
+{q:"flat tyre",a:["przebita opona","nowa opona","pełna opona","brudna opona"],c:0},
+{q:"first aid",a:["pierwsza pomoc","bilet","hotel","paszport"],c:0},
+{q:"scam",a:["oszustwo","promocja","reklama","zniżka"],c:0},
+{q:"valuables",a:["kosztowności","ubrania","jedzenie","bilety"],c:0},
+{q:"money belt",a:["saszetka na pieniądze","walizka","plecak","portfel papierowy"],c:0},
+{q:"travel insurance",a:["ubezpieczenie podróżne","bilet","hotel","paszport"],c:0},
+{q:"blend in",a:["wtopić się w tłum","uciekać","krzyczeć","biec"],c:0},
+{q:"hit the road",a:["wyruszyć","zaparkować","zatrzymać się","skręcić"],c:0},
+{q:"off the beaten track",a:["na uboczu","w centrum","na autostradzie","w korku"],c:0},
+{q:"at the crack of dawn",a:["o świcie","w nocy","w południe","wieczorem"],c:0},
+{q:"travel broadens the mind",a:["podróże kształcą","podróże męczą","podróże są drogie","podróże są szybkie"],c:0}
 ];
 
 let current=0;
@@ -122,32 +115,45 @@ function loadQuestion(){
         return;
     }
 
+    // losowe pytanie
     let q = questions[Math.floor(Math.random()*questions.length)];
 
-    window.correct = q.c;
+    // tworzymy kopię odpowiedzi i losowo je mieszamy
+    let answers = q.a.map((text, index) => ({text, index}));
+    for(let i = answers.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [answers[i], answers[j]] = [answers[j], answers[i]];
+    }
 
+    // zapisanie indeksu poprawnej odpowiedzi po wymieszaniu
+    window.correct = answers.findIndex(a => a.index === q.c);
+
+    // wyświetlenie pytania
     document.getElementById("question").innerText = q.q;
-    document.querySelectorAll("button")[0].innerText = q.a[0];
-    document.querySelectorAll("button")[1].innerText = q.a[1];
-    document.querySelectorAll("button")[2].innerText = q.a[2];
-    document.querySelectorAll("button")[3].innerText = q.a[3];
 
-    time=25;
+    // przypisanie odpowiedzi do przycisków
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((btn, i) => {
+        btn.innerText = answers[i].text;
+    });
+
+    // reset timera
+    time = 25;
     document.getElementById("timer").innerText = "⏱ " + time;
     clearInterval(timer);
 
-    timer=setInterval(()=>{
+    timer = setInterval(() => {
         time--;
-        document.getElementById("timer").innerText="⏱ "+time;
-        if(time===0){
+        document.getElementById("timer").innerText = "⏱ " + time;
+        if(time === 0){
             current++;
             loadQuestion();
         }
-    },1000);
+    }, 1000);
 }
 
 function answer(n){
-    if(n===window.correct) score++;
+    if(n === window.correct) score++;
     current++;
     loadQuestion();
 }
